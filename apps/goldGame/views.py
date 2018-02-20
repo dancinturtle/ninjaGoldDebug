@@ -22,10 +22,10 @@ def process(request):
         request.session['totalgold'].append(request.session['totalgold'][-1] + randomNum)
 
         if(randomNum < 0):
-            request.session['journal'].append("Entered a casino and lost {} gold...Ouch.     {}".format(-randomNum, time))
+            request.session['journal'].append("Entered a casino and lost {} gold...Ouch. {}".format(-randomNum, time))
     
         else :
-            request.session['journal'].append("Earned {} gold from the {}!    {}".format(randomNum, request.POST['building'], time))
+            request.session['journal'].append("Earned {} gold from the {}! {}".format(randomNum, request.POST['building'], time))
     
     return redirect('/')
 
