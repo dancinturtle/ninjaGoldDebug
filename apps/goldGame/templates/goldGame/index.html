@@ -74,6 +74,9 @@
             </p>
             {% endif %}
           {% endfor %}
+          {% for x in request.session.journal %}
+              {{entry}}
+          {% endfor %}
         </div>
       </div>
       <div class="row">
