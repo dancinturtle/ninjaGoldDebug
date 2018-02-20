@@ -8,15 +8,15 @@ def index(request):
     
     context = {"total":request.session['totalgold'][-1]}
 
-    return render("goldGame/index.html", context)
+    return render(request, "goldGame/index.html", context)
 
 def process(request):
     time = datetime.datetime.now().strftime("%Y-%m-%d %I:%M %p")
     buildings = {'farm': [10,20], 'cave': [5,10], 'house':[2,5], 'casino':[-50, 50]}
     if request.method == "POST":
 
-        building = request.POST['Building']
-
+        building = request.POST.get('building')
+        print building, buildings[building][0], buildings[building][1]
         randomNum = random.randint(buildings[building][0], buildings[building][1])
         
         request.session['totalgold'].append(request.session['totalgold'][-1] + randomNum)
@@ -26,10 +26,12 @@ def process(request):
     
         else :
             request.session['journal'].append("Earned {} gold from the {}! {}".format(randomNum, building, time))
+        
+        request.session.modified = True
     
     return redirect('/')
 
 def reset(request):
-    request.session['totalgold'].clear()
-    request.session['journal'].clear()
+    del request.session['totalgold']
+    del request.session['journal']
     return redirect('/')
