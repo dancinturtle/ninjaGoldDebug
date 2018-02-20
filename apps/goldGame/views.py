@@ -25,7 +25,7 @@ def process(request):
             request.session['journal'].append("Entered a casino and lost {} gold...Ouch. {}".format(-randomNum, time))
     
         else :
-            request.session['journal'].append("Earned {} gold from the {}! {}".format(randomNum, request.POST['building'], time))
+            request.session['journal'].append("Earned {} gold from the {}! {}".format(randomNum, building, time))
     
     return redirect('/')
 
