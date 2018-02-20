@@ -1,7 +1,7 @@
 Ninja Gold Debug Quiz
 
 1. FORK this repo
-2. CLONE this repo into your machine
+2. CLONE your forked repo into your machine
 3. NAVIGATE into the cloned project
 4. DEBUG
 5. GIT ADD
