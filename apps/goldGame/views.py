@@ -31,6 +31,6 @@ def process(request):
     return redirect('/')
 
 def reset(request):
-    request.session['totalgold'].clear()
-    request.session['journal'].clear()
+    request.session.clear()
+
     return redirect('/')
