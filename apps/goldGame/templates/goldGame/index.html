@@ -62,7 +62,7 @@
         <h3>Activities:</h3>
         <div class="activities">
           
-          {% for entry in request.session.journal %}
+          {% for entry in request.session.journal reversed %}
          
             {% if "Ouch" in entry %}
             <p class="red">
