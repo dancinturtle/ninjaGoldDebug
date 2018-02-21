@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from time import gmtime, strftime
 import random, datetime
 
 def index(request):
@@ -8,7 +9,7 @@ def index(request):
     
     context = {"total":request.session['totalgold'][-1]}
 
-    return render("goldGame/index.html", context)
+    return render(request,"goldGame/index.html", context)
 
 def process(request):
     time = datetime.datetime.now().strftime("%Y-%m-%d %I:%M %p")
