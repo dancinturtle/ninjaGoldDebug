@@ -27,10 +27,9 @@ def process(request):
     
         else :
             request.session['journal'].append("Earned {} gold from the {}! {}".format(randomNum, building, time))
-    
+    request.session.modified = True
     return redirect('/')
 
 def reset(request):
-    request.session['totalgold'].clear()
-    request.session['journal'].clear()
+    request.session.clear()
     return redirect('/')
