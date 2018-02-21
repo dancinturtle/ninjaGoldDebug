@@ -21,7 +21,7 @@ def process(request):
 
         randomNum = random.randint(buildings[building][0], buildings[building][1])
         
-        request.session['totalgold'].append(request.session['totalgold'] + randomNum)
+        request.session['totalgold']+= randomNum
 
         if(randomNum < 0):
             request.session['journal'].append("Entered a casino and lost {} gold...Ouch. {}".format(-randomNum, time))
@@ -32,6 +32,5 @@ def process(request):
     return redirect('/')
 
 def reset(request):
-    request.session['totalgold']=0
-    request.session['journal']=""
+    request.session.clear()
     return redirect('/')
