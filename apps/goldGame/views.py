@@ -8,18 +8,22 @@ def index(request):
     
     context = {"total":request.session['totalgold'][-1]}
 
-    return render("goldGame/index.html", context)
+    return render(request, "goldGame/index.html", context) #error added request
 
-def process(request):
+def process_money(request): #error process needs to match process_money
     time = datetime.datetime.now().strftime("%Y-%m-%d %I:%M %p")
     buildings = {'farm': [10,20], 'cave': [5,10], 'house':[2,5], 'casino':[-50, 50]}
     if request.method == "POST":
-
-        building = request.POST['Building']
-
-        randomNum = random.randint(buildings[building][0], buildings[building][1])
         
-        request.session['totalgold'].append(request.session['totalgold'][-1] + randomNum)
+        building = request.POST['building']
+        # print building
+        randomNum = random.randint(buildings[building][0], buildings[building][1])
+
+        temp = request.session['totalgold']
+
+        temp.append(request.session['totalgold'][-1] + randomNum)
+
+        request.session['totalgold'] = temp
 
         if(randomNum < 0):
             request.session['journal'].append("Entered a casino and lost {} gold...Ouch. {}".format(-randomNum, time))
@@ -30,6 +34,6 @@ def process(request):
     return redirect('/')
 
 def reset(request):
-    request.session['totalgold'].clear()
-    request.session['journal'].clear()
+    request.session['totalgold'] = [0] #error clear wasn't working
+    request.session['journal'] = [] #error clear wasn't working "object has no attribute 'upper'"
     return redirect('/')
