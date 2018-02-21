@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from time import gmtime, strftime
 import random, datetime
 
 def index(request):
