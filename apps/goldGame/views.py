@@ -16,28 +16,20 @@ def process_money(request): #error process needs to match process_money
     if request.method == "POST":
         
         building = request.POST['building']
-        print building
+        # print building
         randomNum = random.randint(buildings[building][0], buildings[building][1])
-        print randomNum
-        print request.session['totalgold']
-        temporaryTotalGold = request.session['totalgold'][0]
-        print temporaryTotalGold
-        temporaryTotalGold += randomNum
-        print temporaryTotalGold
-        print int(temporaryTotalGold)
 
-        # request.session['totalgold'] = int(temporaryTotalGold)
+        temp = request.session['totalgold']
 
-        # request.session['totalgold'] = temporaryTotalGold
+        temp.append(request.session['totalgold'][-1] + randomNum)
 
-        # request.session['totalgold'].append(request.session['totalgold'][-1] + randomNum)
-        # print request.session['totalgold']
+        request.session['totalgold'] = temp
 
-        # if(randomNum < 0):
-        #     request.session['journal'].append("Entered a casino and lost {} gold...Ouch. {}".format(-randomNum, time))
+        if(randomNum < 0):
+            request.session['journal'].append("Entered a casino and lost {} gold...Ouch. {}".format(-randomNum, time))
     
-        # else :
-        #     request.session['journal'].append("Earned {} gold from the {}! {}".format(randomNum, building, time))
+        else :
+            request.session['journal'].append("Earned {} gold from the {}! {}".format(randomNum, building, time))
     
     return redirect('/')
 
